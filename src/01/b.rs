@@ -9,15 +9,19 @@ pub fn resolve(input: &[u8]) -> String {
         .for_each(|line| {
             if let Some((direction, distance)) = line.split_first() {
                 let distance: usize = str::from_utf8(distance).unwrap().parse().unwrap();
-                let (pointing_0_times, dial) = match direction {
+                let (pointing_0_times, dial_result) = match direction {
                     b'L' => subtract(dial, distance),
                     b'R' => add(dial, distance),
                     _ => (0usize, 0usize),
                 };
+                dial = dial_result;
+                print!("Rotation {:?}{}, pointed {} times",*direction as char,distance,pointing_0_times);
+                print!(" - Ended on {}",dial);
                 counter += pointing_0_times;
                 if dial == 0 {
                     counter += 1;
                 }
+                print!(" - Counter: {}\n",counter);
             }
         });
     counter.to_string()
