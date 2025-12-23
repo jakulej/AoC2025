@@ -5,10 +5,9 @@ pub fn resolve(input: &[u8]) -> String {
             .map(|id_range| {
                 let mut iterator = id_range.splitn(2, |b| b==&b'-');
                 let first =  parse_to_usize(iterator.next().unwrap());
-                print!("\n({:?}",first);
                 let second = parse_to_usize(iterator.next().unwrap());                
-                print!(", {:?})",second);
                 let range = (first,second);
+
                 sum_invalid_id(range)
 
 
