@@ -10,7 +10,7 @@ fn main() {
     println!("Example: {}",a::resolve(EXAMPLE));
     println!("Input: {}",a::resolve(INPUT));
 
-//    println!("\nTask B:");
-//    println!("Example: {}",b::resolve(EXAMPLE));
-//   println!("Input: {}",b::resolve(INPUT));
+    println!("\nTask B:");
+    println!("Example: {}",b::resolve(EXAMPLE));
+    println!("Input: {}",b::resolve(INPUT));
 }
