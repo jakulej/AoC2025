@@ -1,4 +1,4 @@
-pub fn resolve(input: String) -> String {
+pub fn resolve(input: &String) -> String {
 
 
     let (fresh_ids, product_ids) = input
