@@ -1,14 +1,18 @@
 mod a;
 mod b;
 
-const EXAMPLE: &[u8] = include_bytes!("example.txt");
-const INPUT: &[u8] = include_bytes!("input");
-const DAY: &str = "Day 1";
+use std::fs;
+
+const DAY: &str = "Day 5";
 
 fn main() {
+    
+    let example = fs::read_to_string("src/05/example.txt").unwrap();
+    let input = fs::read_to_string("src/05/input").unwrap();
+    
     println!("{} task A:",DAY);
-    println!("Example: {}",a::resolve(EXAMPLE));
-    println!("Input: {}",a::resolve(INPUT));
+    println!("Example: {}",a::resolve(example));
+    println!("Input: {}",a::resolve(input));
 
     //println!("\nTask B:");
     //println!("Example: {}",b::resolve(EXAMPLE));
