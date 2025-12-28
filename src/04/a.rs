@@ -24,10 +24,10 @@ fn count_avaiable_papers(map: Vec<&[u8]>) -> usize {
     paper_count
 }
 fn is_paper_avaiable(map: Vec<&[u8]>, (x, y): (usize,usize)) -> bool {
+    println!("Start x: {}, y: {}",x,y);
     let mut adjecent_papers = 0u8;
     for dy in [-1,0,1] {
         for dx in [-1,0,1] {
-
             if dx == 0 && dy ==0 {
                 continue;
             }
@@ -41,7 +41,7 @@ fn is_paper_avaiable(map: Vec<&[u8]>, (x, y): (usize,usize)) -> bool {
                 Some(v) => v,
                 None => continue,
             };
-
+            println!("  Checking  x: {}, y: {}",nx,ny);
             if map.get(ny).and_then(|r| r.get(nx)) == Some(&PAPER) {
                 adjecent_papers += 1;
             } 
@@ -49,5 +49,5 @@ fn is_paper_avaiable(map: Vec<&[u8]>, (x, y): (usize,usize)) -> bool {
         }
     }
 
-    adjecent_papers > 4
+    adjecent_papers < 4
 }
