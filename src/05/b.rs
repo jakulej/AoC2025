@@ -16,21 +16,27 @@ pub fn resolve(input: &String) -> String {
 
     count_fresh_id(fresh_ids).to_string()
 }
+fn count_fresh_id(mut fresh_ids: Vec<(usize,usize)>) -> usize {
 
-fn count_fresh_id(fresh_ids: Vec<(usize,usize)>) -> usize {
+    fresh_ids.sort_by_key(|range| range.0);
 
-    (0..(get_highest_id(&fresh_ids)+1))
-        .filter(|product| is_fresh(*product, &fresh_ids))
-        .count()
-}
+    let mut available_id_count = 0usize;
+    let mut current_range = fresh_ids[0];
 
-fn is_fresh(product_id: usize, fresh_ids: &Vec<(usize,usize)>) -> bool {
-    fresh_ids.iter().any(|range| (range.0..(range.1+1)).contains(&product_id))
-}
-fn get_highest_id(fresh_ids: &Vec<(usize,usize)>) -> usize {
-    fresh_ids
-        .iter()
-        .map(|range| range.1)
-        .max()
-        .unwrap()
+    for i in 0..fresh_ids.len() {
+
+        if fresh_ids[i].1 > current_range.1 {
+            current_range.1 = fresh_ids[i].1;        
+        }
+        if i+1 >= fresh_ids.len(){
+            available_id_count += current_range.1 - current_range.0 + 1;
+            continue;
+        }
+
+        if fresh_ids[i+1].0 > current_range.1 {
+            available_id_count += current_range.1 - current_range.0 + 1;
+            current_range.0 = fresh_ids[i+1].0;           
+        }
+    }
+    available_id_count
 }
